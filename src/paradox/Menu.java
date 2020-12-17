@@ -36,8 +36,11 @@ public class Menu {
 	public void printNTimesMenu() {
 
 		// Numero de veces
-		System.out.print("Escriba el numero de veces que desea simular: ");
-		int numberOfIterarions = Common.readInt();
+		int numberOfIterarions = 0;
+		while (!(numberOfIterarions > 0 && numberOfIterarions <= 2000000000)) {
+			System.out.print("Escriba el numero de veces que desea simular: ");
+			numberOfIterarions = Common.readInt();
+		}
 
 		// Opciones de Interfaz
 

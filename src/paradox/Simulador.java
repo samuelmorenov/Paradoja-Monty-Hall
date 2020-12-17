@@ -8,10 +8,10 @@ public class Simulador {
 
 	public void simularNVeces(SimulationMode sm, int ni) {
 
-		int vecesQueCambioYGano = 0;
-		int vecesQueCambioYNoGano = 0;
-		int vecesQueNoCambioYGano = 0;
-		int vecesQueNoCambioYNoGano = 0;
+		int nVeces_SiCambio_SiGano = 0;
+		int nVeces_SiCambio_NoGano = 0;
+		int nVeces_NoCambio_SiGano = 0;
+		int nVeces_NoCambio_NoGano = 0;
 
 		for (int i = 0; i < ni; i++) {
 
@@ -55,26 +55,25 @@ public class Simulador {
 			}
 
 			if (cambia && (eleccionFinal == puertaConPremio)) {
-				vecesQueCambioYGano++;
+				nVeces_SiCambio_SiGano++;
 				if (sm != SimulationMode.RESULTADO_FINAL)
 					System.out.println("El concursante cambio de puerta y gano");
 			}
 			if (cambia && eleccionFinal != puertaConPremio) {
-				vecesQueCambioYNoGano++;
+				nVeces_SiCambio_NoGano++;
 				if (sm != SimulationMode.RESULTADO_FINAL)
 					System.out.println("El concursante cambio de puerta y no gano");
 			}
 			if (!cambia && (eleccionFinal == puertaConPremio)) {
-				vecesQueNoCambioYGano++;
+				nVeces_NoCambio_SiGano++;
 				if (sm != SimulationMode.RESULTADO_FINAL)
 					System.out.println("El concursante no cambio de puerta y gano");
 			}
 			if (!cambia && !(eleccionFinal == puertaConPremio)) {
-				vecesQueNoCambioYNoGano++;
+				nVeces_NoCambio_NoGano++;
 				if (sm != SimulationMode.RESULTADO_FINAL)
 					System.out.println("El concursante no cambio de puerta y no gano");
 			}
-
 		}
 
 		if (sm != SimulationMode.RESULTADO_FINAL) {
@@ -82,14 +81,13 @@ public class Simulador {
 			System.out.println("Resultado final");
 		}
 
-		int porcentajeVictoriasCambiando = (vecesQueCambioYGano * 100) / (vecesQueCambioYGano + vecesQueCambioYNoGano);
-		int porcentajeVictoriasNoCambiando = (vecesQueNoCambioYGano * 100)
-				/ (vecesQueNoCambioYGano + vecesQueNoCambioYNoGano);
+		String victoriasCambiando = Common.calcularPorcentaje(nVeces_SiCambio_SiGano, nVeces_SiCambio_NoGano);
+		String victoriasSinCambiar = Common.calcularPorcentaje(nVeces_NoCambio_SiGano, nVeces_NoCambio_NoGano);
 
-		System.out.println("No cambiando de puerta, el concursante gano " + vecesQueNoCambioYGano + " veces y perdio "
-				+ vecesQueNoCambioYNoGano + " veces. Hace un porcentaje de victorias del " + porcentajeVictoriasNoCambiando + "%.");
-		System.out.println("Cambiando de puerta, el concursante gano " + vecesQueCambioYGano + " veces y perdio "
-				+ vecesQueCambioYNoGano + " veces. Hace un porcentaje de victorias del " + porcentajeVictoriasCambiando + "%.");
+		System.out.println("No cambiando de puerta, el concursante gano " + nVeces_NoCambio_SiGano + " veces y perdio "
+				+ nVeces_NoCambio_NoGano + " veces. Hace un porcentaje de victorias del " + victoriasSinCambiar + "%.");
+		System.out.println("Cambiando de puerta, el concursante gano " + nVeces_SiCambio_SiGano + " veces y perdio "
+				+ nVeces_SiCambio_NoGano + " veces. Hace un porcentaje de victorias del " + victoriasCambiando + "%.");
 
 	}
 

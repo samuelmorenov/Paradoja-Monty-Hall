@@ -3,6 +3,7 @@ package paradox;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 
 public class Common {
 	
@@ -48,6 +49,21 @@ public class Common {
 		default:
 			break;
 		}
+	}
+	
+	public static String calcularPorcentaje(int siGano, int noGano) {
+		
+		float fsiGano = (float) siGano;
+		float fnoGano = (float) noGano;
+		
+		
+		float porcentajeVictoriasCambiando = (fsiGano * 100) / (fsiGano + fnoGano);
+		
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
+		
+		return df.format(porcentajeVictoriasCambiando);
+		
 	}
 
 }
