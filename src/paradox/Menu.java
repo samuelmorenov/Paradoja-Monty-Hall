@@ -22,7 +22,7 @@ public class Menu {
 				loop = false;
 				break;
 			case 1:
-				this.printNTimesMenu();
+				printNTimesMenu();
 				break;
 			case 2:
 				s.simularOpcion();
@@ -33,7 +33,7 @@ public class Menu {
 		}
 	}
 
-	private void printNTimesMenu() {
+	public void printNTimesMenu() {
 
 		// Numero de veces
 		System.out.print("Escriba el numero de veces que desea simular: ");

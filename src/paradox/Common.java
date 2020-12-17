@@ -22,4 +22,28 @@ public class Common {
 		return data;
 	}
 
+	public static int generateDoor() {
+		int minimum = 1;
+		int maximum = 3;
+		int randomNum = minimum + (int)(Math.random() * maximum);
+		return randomNum;
+	}
+	
+	public static void printDoor(int door) {
+		switch (door) {
+		case 1:
+			System.out.println("[ X ] [ - ] [ - ]");
+			break;
+		case 2:
+			System.out.println("[ - ] [ X ] [ - ]");
+			break;
+		case 3:
+			System.out.println("[ - ] [ - ] [ X ]");
+			break;
+
+		default:
+			break;
+		}
+	}
+
 }
