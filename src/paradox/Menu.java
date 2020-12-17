@@ -1,23 +1,28 @@
 package paradox;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import paradox.Simulador.SimulationMode;
 
 public class Menu {
 
-	public void run() {
-		Simulador s = new Simulador();
-		boolean loop = true;
+	private Simulador s = new Simulador();
 
+	public void run() {
+
+		boolean loop = true;
 		while (loop) {
-			int option = printMenu();
+			System.out.println("Opciones:");
+			System.out.println("0. Terminar programa.");
+			System.out.println("1. Simular un numero n de veces.");
+			System.out.println("2. Simular una opcion elegida.");
+
+			int option = Common.readInt();
+
 			switch (option) {
 			case 0:
 				loop = false;
 				break;
 			case 1:
-				s.simularNVeces();
+				this.printNTimesMenu();
 				break;
 			case 2:
 				s.simularOpcion();
@@ -28,29 +33,45 @@ public class Menu {
 		}
 	}
 
-	private int printMenu() {
+	private void printNTimesMenu() {
 
-		System.out.println("Opciones:");
-		System.out.println("0. Terminar programa.");
-		System.out.println("1. Simular un numero n de veces.");
-		System.out.println("2. Simular una opcion elegida.");
-		return readInt();
+		// Numero de veces
+		System.out.print("Escriba el numero de veces que desea simular: ");
+		int numberOfIterarions = Common.readInt();
 
-	}
+		// Opciones de Interfaz
 
-	private int readInt() {
-		boolean readed = false;
-		int data = 0;
-		while (!readed) {
-			System.out.print("> ");
-			try {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-				data = Integer.parseInt(reader.readLine());
-				readed = true;
-			} catch (IOException e) {
-				System.out.println("Error de lectura, escribalo de nuevo");
+		System.out.println("Elija que mostrar en la simulacion:");
+		System.out.println("1. Todo el texto.");
+		System.out.println("2. El resultado de cada iteracion.");
+		System.out.println("3. Solo el resultado final.");
+
+		SimulationMode simulationMode = SimulationMode.RESULTADO_FINAL;
+
+		boolean loop = true;
+		while (loop) {
+			int option = Common.readInt();
+			switch (option) {
+			case 1:
+				simulationMode = SimulationMode.TODO;
+				loop = false;
+				break;
+			case 2:
+				simulationMode = SimulationMode.CADA_ITERACION;
+				loop = false;
+				break;
+			case 3:
+				simulationMode = SimulationMode.RESULTADO_FINAL;
+				loop = false;
+				break;
+			default:
+				System.out.println("Escriba un opcion correcta");
 			}
 		}
-		return data;
+
+		// Llamada al simulador
+		s.simularNVeces(simulationMode, numberOfIterarions);
+
 	}
+
 }
