@@ -29,6 +29,10 @@ public class Common {
 		return randomNum;
 	}
 	
+	public static boolean generateBool() {
+		return Math.random() < 0.5;
+	}
+	
 	public static void printDoor(int door) {
 		switch (door) {
 		case 1:
